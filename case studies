@@ -1,0 +1,591 @@
+PYTHON ACTIVITY-BASED LEARNING
+10 Complete Case Studies
+Problem statements • Objectives • Assumptions • Algorithms • Flowcharts • Pseudocode • Python • Testing
+Prepared according to the mandatory deliverables and syllabus listed in the uploaded “Python Activity-Based Learning”    
+Advanced Numeric Pattern Generator
+1. Problem statement
+Produce a hollow diamond or symmetric numerical pattern using a user-specified size. Reject invalid dimensions and align the output carefully.
+2. Objectives
+    • Generate a hollow diamond and a symmetric numeric pattern.
+    • Validate dimensions before generating output.
+    • Use nested loops and spacing to keep the pattern aligned.
+3. Assumptions
+    • The size is a positive odd integer from 3 through 19.
+    • The selected pattern is either H (hollow diamond) or N (numeric diamond).
+    • Rows are centered using spaces; numeric values cycle from 1 to 9.
+4. Algorithm
+1. Read pattern choice and size.
+2. Validate the choice and require an odd size in the stated range.
+3. For each row, calculate its distance from the middle and the required indentation.
+4. Print boundary stars for a hollow diamond, or symmetric numbers for a numeric diamond.
+5. Flowchart
+
+Flowchart represented as a linear decision/process diagram for clear rendering in Word.
+6. Pseudo code
+INPUT choice, size\nIF size is invalid OR choice not in {H, N}: PRINT error\nELSE:\n  FOR each row r from 0 to size-1:\n    compute indent and width\n    IF choice = H: print hollow row with boundary stars\n    ELSE: print symmetric numeric row
+7. Python source code
+# Hollow Diamond Pattern
+
+size = int(input("Enter the size of the diamond (positive odd number): "))
+
+if size <= 0 or size % 2 == 0:
+    print("Invalid size! Please enter a positive odd number.")
+else:
+    middle = size // 2
+
+    for row in range(size):
+        if row <= middle:
+            spaces = middle - row
+        else:
+            spaces = row - middle
+
+        print(" " * spaces, end="")
+
+        for col in range(size - 2 * spaces):
+            if col == 0 or col == size - 2 * spaces - 1:
+                print("*", end="")
+            else:
+                print(" ", end="")
+
+        print()
+8. Test cases and output screenshots
+Test input	Expected output
+H, 5	  *\n * *\n*   *\n * *\n  *
+N, 5	    1\n  1 2 1\n1 2 3 2 1\n  1 2 1\n    1
+H, 4	Invalid input: choose H/N and an odd size from 3 to 19.
+Sample console output screenshot:
+
+9. Conclusion
+The generator produces centered hollow and numeric diamonds and prevents invalid dimensions from reaching the pattern logic.
+
+ Warehouse Inventory Reconciliation
+1. Problem statement
+Compare opening stock, received quantities, dispatched quantities, and recorded closing stock for products; report discrepancies and replenishment needs.
+2. Objectives
+    • Calculate expected closing stock.
+    • Detect mismatches with recorded stock.
+    • Estimate replenishment needed to meet a target.
+3. Assumptions
+    • Quantities are non-negative integers.
+    • Target stock is supplied for each product.
+    • Expected closing = opening + received − dispatched.
+4. Algorithm
+1. Read each product's values.
+2. Calculate expected closing stock.
+3. Compare expected and recorded values.
+4. Compute target shortage and print a report.
+5. Flowchart
+
+
+Flowchart represented as a linear decision/process diagram for clear rendering in Word.
+6. Pseudo code
+FOR each product tuple (name, opening, received, dispatched, recorded, target):\n expected = opening + received - dispatched\n discrepancy = recorded - expected\n shortage = max(0, target - recorded)\n PRINT values
+7. Python source code
+# Inventory Reconciliation
+
+opening = int(input("Enter opening stock: "))
+received = int(input("Enter received quantity: "))
+dispatched = int(input("Enter dispatched quantity: "))
+recorded = int(input("Enter recorded closing stock: "))
+
+expected = opening + received - dispatched
+
+print("Expected closing stock:", expected)
+
+if expected != recorded:
+    print("Stock discrepancy found")
+
+    if expected > recorded:
+        print("Shortage:", expected - recorded)
+    else:
+        print("Extra stock:", recorded - expected)
+else:
+    print("No discrepancy")
+
+if recorded <= 5:
+    print("Replenishment needed")
+else:
+    print("Stock is sufficient")
+
+    
+8. Test cases and output screenshots
+Test input	Expected output
+Pens	expected 70; recorded 70; difference 0; replenish 20; OK
+Books	expected 55; recorded 60; difference 5; replenish 20; CHECK
+Files	expected 20; recorded 18; difference -2; replenish 7; CHECK
+Sample console output screenshot:
+
+9. Conclusion
+The reconciliation report highlights stock-record errors and quantifies replenishment for each item.
+
+Examination Result and Grace-Mark Validation
+1. Problem statement
+Evaluate marks against subject pass requirements, apply a limited grace policy, and classify the final result without exceeding maximum marks.
+2. Objectives
+    • Check each subject's pass mark.
+    • Apply grace marks under a defined rule.
+    • Produce a pass/fail result and classification.
+3. Assumptions
+    • Each subject is out of 100 and has a pass mark of 35.
+    • At most 3 grace marks may be added to one subject.
+    • Final marks cannot exceed 100.
+4. Algorithm
+1. Read subject marks.
+2. For each subject below 35 by no more than 3, add the required grace marks.
+3. Check all subjects for passing.
+4. Classify the average if all subjects pass.
+5. Flowchart
+
+
+Flowchart represented as a linear decision/process diagram for clear rendering in Word.
+6. Pseudo code
+FOR each mark:\n IF mark < 35 AND 35-mark <= 3: mark = min(100, 35)\nIF every mark >= 35: compute average and classification\nELSE: result = FAIL
+7. Python source code
+# Marks Evaluation with Grace Marks
+
+mark1 = int(input("Enter marks for subject 1: "))
+mark2 = int(input("Enter marks for subject 2: "))
+mark3 = int(input("Enter marks for subject 3: "))
+
+pass_mark = 35
+grace = 5
+
+# Apply grace marks
+if mark1 < pass_mark:
+    mark1 = mark1 + grace
+
+if mark2 < pass_mark:
+    mark2 = mark2 + grace
+
+if mark3 < pass_mark:
+    mark3 = mark3 + grace
+
+# Do not allow marks above 100
+if mark1 > 100:
+    mark1 = 100
+
+if mark2 > 100:
+    mark2 = 100
+
+if mark3 > 100:
+    mark3 = 100
+
+print("Final marks:", mark1, mark2, mark3)
+
+# Check result
+if mark1 >= pass_mark and mark2 >= pass_mark and mark3 >= pass_mark:
+    total = mark1 + mark2 + mark3
+    percentage = total / 3
+
+    print("Total marks:", total)
+    print("Percentage:", percentage)
+
+    if percentage >= 75:
+        print("Result: Distinction")
+    elif percentage >= 60:
+        print("Result: First Class")
+    elif percentage >= 50:
+        print("Result: Second Class")
+    else:
+        print("Result: Pass")
+else:
+    print("Result: Fail")
+
+8. Test cases and output screenshots
+Test input	Expected output
+34,67,81,35	Final marks: [35, 67, 81, 35] Average: 54.5 Result: Pass
+20,67,81,35	Final marks: [20, 67, 81, 35] Result: FAIL
+Sample console output screenshot:
+
+9. Conclusion
+Grace marks are applied only within the stated limit, and the result is computed consistently from the final marks.
+
+Nested Loop Examination Seating Generator
+1. Problem statement
+Generate a classroom seating layout with row and column identifiers while preserving designated reserved seats.
+2. Objectives
+    • Create a grid using nested loops.
+    • Label seats consistently.
+    • Mark reserved positions separately.
+3. Assumptions
+    • Rows and columns are positive integers.
+    • Reserved seats are provided as zero-based coordinate pairs.
+    • A reserved seat is shown as R; other seats show their row-column label.
+4. Algorithm
+1. Read dimensions and reserved coordinates.
+2. Loop through every row and column.
+3. Print R for reserved locations; otherwise print the seat identifier.
+4. Display the completed grid.
+5. Flowchart
+
+
+Flowchart represented as a linear decision/process diagram for clear rendering in Word.
+6. Pseudo code
+FOR row in range(rows):\n  FOR col in range(cols):\n    IF (row,col) reserved: print R\n    ELSE: print seat label\n  print newline
+7. Python source code
+# Classroom Seating Layout
+
+rows = int(input("Enter number of rows: "))
+columns = int(input("Enter number of columns: "))
+
+reserved_row = int(input("Enter reserved seat row: "))
+reserved_column = int(input("Enter reserved seat column: "))
+
+for i in range(1, rows + 1):
+    for j in range(1, columns + 1):
+
+        if i == reserved_row and j == reserved_column:
+            print("R", end="   ")
+        else:
+            print(str(i) + "-" + str(j), end=" ")
+
+    print()
+8. Test cases and output screenshots
+Test input	Expected output
+3 rows × 4 columns	1-1 | R | 1-3 | 1-4\n2-1 | 2-2 | 2-3 | 2-4\n3-1 | 3-2 | 3-3 | R
+Sample console output screenshot:
+
+
+9. Conclusion
+Nested loops provide a simple way to build and display a seating matrix while keeping reserved locations identifiable.
+
+ Text Compression Using Character Runs
+1. Problem statement
+Encode consecutive repeated characters as a character followed by its run count, and compare encoded and original lengths.
+2. Objectives
+    • Identify consecutive character runs.
+    • Create a run-length encoded string.
+    • Report whether encoding reduces length.
+3. Assumptions
+    • Input is a string; case and spaces are preserved.
+    • Each run is represented as character + decimal count.
+    • Empty input produces an empty encoding.
+4. Algorithm
+1. Read text.
+2. Track the current character and run length.
+3. When a character changes, append the prior run.
+4. Append the final run and compare lengths.
+5. Flowchart
+
+
+Flowchart represented as a linear decision/process diagram for clear rendering in Word.
+6. Pseudo code
+IF text empty: encoded = empty\nELSE initialize current and count\nFOR each next character: update count or append current+count\nappend final run\nPRINT encoding and length comparison
+7. Python source code
+# Simple Text Encoding
+
+text = input("Enter a text: ")
+
+encoded = ""
+count = 1
+
+for i in range(1, len(text)):
+    if text[i] == text[i - 1]:
+        count = count + 1
+    else:
+        encoded = encoded + text[i - 1] + str(count)
+        count = 1
+
+# Add the last character and its count
+if len(text) > 0:
+    encoded = encoded + text[-1] + str(count)
+
+print("Encoded text:", encoded)
+
+if len(encoded) < len(text):
+    print("Encoded text is shorter")
+else:
+    print("Original text is shorter or equal")
+
+
+8. Test cases and output screenshots
+Test input	Expected output
+aaabbc	Encoded: a3b2c1; Original length: 6; Encoded length: 6; Beneficial: False
+aaaaaaaa	Encoded: a8; Original length: 8; Encoded length: 2; Beneficial: True
+Sample console output screenshot:
+
+9. Conclusion
+Run-length encoding is implemented using a single scan; the length comparison identifies when the encoding is useful.
+
+ Student Marks Matrix Analysis
+1. Problem statement
+Analyze a matrix of marks to calculate student totals and averages, subject averages, and identify the highest-scoring student.
+2. Objectives
+    • Use nested lists to store marks.
+    • Calculate row and column statistics.
+    • Find the top performer.
+3. Assumptions
+    • Rows represent students and columns represent subjects.
+    • All marks are numeric and use the same scale.
+    • The first maximum is reported if totals tie.
+4. Algorithm
+1. Store the marks matrix.
+2. Compute each row's total and average.
+3. Compute each subject's average by column.
+4. Find the index of the maximum student total.
+5. Flowchart
+
+
+Flowchart represented as a linear decision/process diagram for clear rendering in Word.
+6. Pseudo code
+FOR each student row: total=sum(row), average=total/subjects\nFOR each subject column: average=sum(column)/students\nfind maximum row total\nPRINT statistics
+7. Python source code
+
+marks = [
+    [80, 75, 90],
+    [70, 85, 80],
+    [90, 95, 85]
+]
+
+students = ["A", "B", "C"]
+subjects = 3
+
+# Student totals and averages
+for i in range(3):
+    total = sum(marks[i])
+    avg = total / subjects
+    print(students[i], "Total:", total, "Average:", avg)
+
+# Subject averages
+for j in range(subjects):
+    total = 0
+    for i in range(3):
+        total += marks[i][j]
+    print("Subject", j+1, "Average:", total/3)
+
+# Highest scoring student
+totals = [sum(row) for row in marks]
+highest = totals.index(max(totals))
+
+print("Highest Scoring Student:", students[highest])
+print("Highest Total:", totals[highest])
+
+8. Test cases and output screenshots
+Test input	Expected output
+Matrix shown in code	Totals 251, 242, 244; subject averages Python 78.33, Maths 82.00, English 85.33; top Student 1
+Sample console output screenshot:
+
+9. Conclusion
+The matrix approach efficiently summarizes performance both student-wise and subject-wise.
+
+ Fuel Consumption and Route Comparison
+1. Problem statement
+Compare vehicles for a journey using distance, mileage, fuel price, and a reserve requirement; identify the lowest-cost feasible vehicle.
+2. Objectives
+    • Calculate required fuel and estimated cost.
+    • Check reserve feasibility.
+    • Select the cheapest feasible option.
+3. Assumptions
+    • Distance and mileage are positive.
+    • Fuel price is the same for all vehicles.
+    • Required fuel includes the specified reserve percentage.
+4. Algorithm
+1. Read trip distance, fuel price, and reserve percentage.
+2. For each vehicle, calculate base fuel and reserve-adjusted fuel.
+3. Calculate cost and mark feasible options.
+4. Choose the minimum-cost feasible vehicle.
+5. Flowchart
+
+
+Flowchart represented as a linear decision/process diagram for clear rendering in Word.
+6. Pseudo code
+FOR each vehicle (name, mileage):\n fuel = distance/mileage * (1+reserve/100)\n cost = fuel*price\n store result\nchoose minimum cost among feasible vehicles
+7. Python source code
+
+distance = float(input("Enter journey distance: "))
+reserve = float(input("Enter reserve fuel: "))
+
+vehicles = [
+    ["Car", 15, 5],
+    ["Bike", 40, 3],
+    ["Bus", 10, 8]
+]
+
+min_cost = 999999
+best_vehicle = ""
+
+for v in vehicles:
+    name = v[0]
+    mileage = v[1]
+    fuel_price = v[2]
+
+    fuel = distance / mileage
+
+    if fuel >= reserve:
+        cost = fuel * fuel_price
+
+        print(name, "Cost:", cost)
+
+        if cost < min_cost:
+            min_cost = cost
+            best_vehicle = name
+
+if best_vehicle != "":
+    print("Best Vehicle:", best_vehicle)
+    print("Minimum Cost:", min_cost)
+else:
+    print("No feasible vehicle found")
+
+8. Test cases and output screenshots
+Test input	Expected output
+240 km, $1.80/L, 10% reserve	Car A: 17.60 L, $31.68; Car B: 13.20 L, $23.76; Car C: 22.00 L, $39.60; lowest: Car B
+Sample console output screenshot:
+
+9. Conclusion
+The calculation compares vehicles on a consistent basis and selects the lowest estimated cost.
+
+ String-Based Examination Answer Evaluation
+1. Problem statement
+Compare student answer strings with an answer key, count correct, incorrect, and unanswered items, and calculate a score with negative marking.
+2. Objectives
+    • Compare answers position by position.
+    • Count response categories.
+    • Apply the supplied scoring rule.
+3. Assumptions
+    • Answer key and response have equal length.
+    • Correct answer earns 2 marks; incorrect answer loses 0.5; blank earns 0.
+    • Comparison ignores letter case and surrounding whitespace.
+4. Algorithm
+1. Read the key and student answers.
+2. Normalize each response.
+3. Compare corresponding answers.
+4. Update category counts and score; print the result.
+5. Flowchart
+
+
+Flowchart represented as a linear decision/process diagram for clear rendering in Word.
+6. Pseudo code
+FOR each paired key and answer:\n IF answer blank: unanswered++\n ELSE IF normalized answer equals key: correct++, score+=2\n ELSE: incorrect++, score-=0.5\nPRINT counts and score
+7. Python source code
+
+key = ["A", "B", "C", "D", "A"]
+answers = ["A", "B", "D", "", "A"]
+
+correct = 0
+wrong = 0
+unanswered = 0
+
+for i in range(len(key)):
+    if answers[i] == "":
+        unanswered += 1
+    elif answers[i] == key[i]:
+        correct += 1
+    else:
+        wrong += 1
+
+score = (correct * 2) - (wrong * 0.5)
+
+print("Correct Answers:", correct)
+print("Wrong Answers:", wrong)
+print("Unanswered:", unanswered)
+print("Final Score:", score)
+
+8. Test cases and output screenshots
+Test input	Expected output
+A,C,B,D,A vs a,B,blank,D,A	Correct: 3 Incorrect: 1 Unanswered: 1; Score: 5.5
+Sample console output screenshot:
+
+9. Conclusion
+String normalization makes evaluation case-insensitive, while the loop applies the scoring policy to every item.
+
+Campus Transport Allocation
+1. Problem statement
+Determine how many buses are needed for each route based on passenger demand and bus capacity, and report unserved passengers if capacity is insufficient.
+2. Objectives
+    • Calculate required buses using integer arithmetic.
+    • Compare demand with available buses.
+    • Report any unmet passenger demand.
+3. Assumptions
+    • Passenger demand and bus capacity are non-negative integers; capacity is positive.
+    • Each route has a fixed number of available buses.
+    • Buses can be filled up to capacity.
+4. Algorithm
+1. Read each route's demand, capacity, and available buses.
+2. Calculate buses required using ceiling division.
+3. Calculate total available capacity.
+4. Find unserved demand and print route summary.
+5. Flowchart
+
+
+Flowchart represented as a linear decision/process diagram for clear rendering in Word.
+6. Pseudo code
+FOR each route:\n needed = (demand + capacity - 1) // capacity\n available_capacity = available_buses * capacity\n unserved = max(0, demand - available_capacity)\n PRINT needed and unserved
+7. Python source code
+
+routes = ["Route A", "Route B", "Route C"]
+
+demand = [100, 150, 80]
+capacity = 50
+
+for i in range(3):
+    buses = (demand[i] + capacity - 1) // capacity
+    available = buses * capacity
+    unserved = max(0, demand[i] - available)
+
+    print(routes[i])
+    print("Buses Required:", buses)
+    print("Available Capacity:", available)
+    print("Unserved Passengers:", unserved)
+
+8. Test cases and output screenshots
+Test input	Expected output
+North 145/50/3	3 buses needed; available 3; unserved 0
+South 92/40/2	3 buses needed; available 2; unserved 12
+East 60/30/3	2 buses needed; available 3; unserved 0
+Sample console output screenshot:
+
+9. Conclusion
+The program estimates bus requirements and flags routes where the current fleet cannot accommodate all passengers.
+
+Progressive Electricity Billing
+1. Problem statement
+Calculate an electricity bill using progressive consumption slabs, a fixed charge, and a rebate, then display the final amount.
+2. Objectives
+    • Apply slab rates incrementally.
+    • Include fixed charges.
+    • Apply a rebate under a defined threshold.
+3. Assumptions
+    • Units are non-negative.
+    • Rates: first 100 units at 1.5, next 100 at 2.5, remaining at 4.0.
+    • Fixed charge is 30; a 5% rebate applies when energy charge is below 200.
+4. Algorithm
+1. Read units.
+2. Calculate each slab's charge.
+3. Add fixed charge.
+4. Apply the rebate if eligible and display bill.
+5. Flowchart
+
+
+Flowchart represented as a linear decision/process diagram for clear rendering in Word.
+6. Pseudo code
+energy = 0\ncharge first min(units,100) at 1.5\ncharge next min(max(units-100,0),100) at 2.5\ncharge remaining at 4.0\ntotal = energy + fixed\nIF energy < 200: total = total * 0.95\nPRINT total
+7. Python source code
+
+units = int(input("Enter electricity units: "))
+
+if units <= 100:
+    bill = units * 2
+elif units <= 200:
+    bill = 100 * 2 + (units - 100) * 3
+else:
+    bill = 100 * 2 + 100 * 3 + (units - 200) * 5
+
+fixed_charge = 50
+rebate = 20
+
+total = bill + fixed_charge - rebate
+
+print("Energy Charge:", bill)
+print("Fixed Charge:", fixed_charge)
+print("Rebate:", rebate)
+print("Final Electricity Bill:", total)
+
+8. Test cases and output screenshots
+Test input	Expected output
+80 units	Energy charge: 120.00; Final bill: 142.50
+250 units	Energy charge: 450.00; Final bill: 480.00
+-4 units	Invalid units: enter a non-negative value.
+Sample console output screenshot:
+
+9. Conclusion
+Progressive billing is calculated slab by slab, with fixed fees and rebate logic handled transparently.
