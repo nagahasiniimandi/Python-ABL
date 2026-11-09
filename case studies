@@ -21,6 +21,7 @@ Produce a hollow diamond or symmetric numerical pattern using a user-specified s
 5. Flowchart
 
 Flowchart represented as a linear decision/process diagram for clear rendering in Word.
+
 6. Pseudo code
 INPUT choice, size\nIF size is invalid OR choice not in {H, N}: PRINT error\nELSE:\n  FOR each row r from 0 to size-1:\n    compute indent and width\n    IF choice = H: print hollow row with boundary stars\n    ELSE: print symmetric numeric row
 7. Python source code
