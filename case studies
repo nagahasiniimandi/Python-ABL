@@ -21,6 +21,7 @@ Produce a hollow diamond or symmetric numerical pattern using a user-specified s
 5. Flowchart
 
 Flowchart represented as a linear decision/process diagram for clear rendering in Word.
+Start → Enter the size of the diamond → Check whether the size is a positive integer → If No, display an error message → Ask the user to enter the size again → If Yes, print the upper half of the hollow diamond → Print the lower half of the hollow diamond → Display the complete diamond pattern → Stop.
 
 6. Pseudo code
 INPUT choice, size\nIF size is invalid OR choice not in {H, N}: PRINT error\nELSE:\n  FOR each row r from 0 to size-1:\n    compute indent and width\n    IF choice = H: print hollow row with boundary stars\n    ELSE: print symmetric numeric row
@@ -77,8 +78,9 @@ Compare opening stock, received quantities, dispatched quantities, and recorded 
 4. Compute target shortage and print a report.
 5. Flowchart
 
-
 Flowchart represented as a linear decision/process diagram for clear rendering in Word.
+Start → Enter product details → Enter opening stock quantity → Enter received quantity → Enter dispatched quantity → Enter recorded closing stock → Calculate expected closing stock → Compare expected closing stock with recorded closing stock → Check for discrepancies → If discrepancies exist, report them → Check whether stock is below the minimum required level → If yes, report replenishment needs → Display the stock report → Stop.
+
 6. Pseudo code
 FOR each product tuple (name, opening, received, dispatched, recorded, target):\n expected = opening + received - dispatched\n discrepancy = recorded - expected\n shortage = max(0, target - recorded)\n PRINT values
 7. Python source code
@@ -137,8 +139,9 @@ Evaluate marks against subject pass requirements, apply a limited grace policy, 
 4. Classify the average if all subjects pass.
 5. Flowchart
 
-
 Flowchart represented as a linear decision/process diagram for clear rendering in Word.
+Start → Enter student marks and subject pass requirements → Enter maximum marks → Check whether the marks are valid → If invalid, display an error message and re-enter the marks → If valid, compare marks with the pass requirements → If marks are below the pass requirement, check grace marks eligibility → If eligible, apply limited grace marks without exceeding maximum marks → Calculate final marks → Classify the result as Pass or Fail → Display the final result → Stop.
+
 6. Pseudo code
 FOR each mark:\n IF mark < 35 AND 35-mark <= 3: mark = min(100, 35)\nIF every mark >= 35: compute average and classification\nELSE: result = FAIL
 7. Python source code
@@ -219,8 +222,9 @@ Generate a classroom seating layout with row and column identifiers while preser
 4. Display the completed grid.
 5. Flowchart
 
-
 Flowchart represented as a linear decision/process diagram for clear rendering in Word.
+Start → Enter the number of rows and columns → Enter reserved seat details → Validate the input dimensions and reserved seat positions → If invalid, display an error message and re-enter the details → If valid, generate the classroom seating layout → Assign row and column identifiers → Preserve the designated reserved seats → Arrange the remaining seats → Display the completed seating layout → Stop.
+
 6. Pseudo code
 FOR row in range(rows):\n  FOR col in range(cols):\n    IF (row,col) reserved: print R\n    ELSE: print seat label\n  print newline
 7. Python source code
@@ -268,8 +272,9 @@ Encode consecutive repeated characters as a character followed by its run count,
 4. Append the final run and compare lengths.
 5. Flowchart
 
-
 Flowchart represented as a linear decision/process diagram for clear rendering in Word.
+Start → Enter a string → Initialize the encoded string → Read the characters one by one → Count consecutive repeated characters → Append each character followed by its run count → Repeat until all characters are processed → Calculate the original string length → Calculate the encoded string length → Compare both lengths → Display the original string, encoded string, and their lengths → Stop.
+
 6. Pseudo code
 IF text empty: encoded = empty\nELSE initialize current and count\nFOR each next character: update count or append current+count\nappend final run\nPRINT encoding and length comparison
 7. Python source code
@@ -326,8 +331,9 @@ Analyze a matrix of marks to calculate student totals and averages, subject aver
 4. Find the index of the maximum student total.
 5. Flowchart
 
-
 Flowchart represented as a linear decision/process diagram for clear rendering in Word.
+Start → Enter the number of students and subjects → Enter the marks of each student in all subjects → Validate the marks → If invalid, display an error message and re-enter the marks → If valid, calculate each student's total marks → Calculate each student's average → Calculate the average marks for each subject → Compare student totals → Identify the highest-scoring student → Display student totals, averages, subject averages, and topper details → Stop.
+
 6. Pseudo code
 FOR each student row: total=sum(row), average=total/subjects\nFOR each subject column: average=sum(column)/students\nfind maximum row total\nPRINT statistics
 7. Python source code
@@ -387,8 +393,9 @@ Compare vehicles for a journey using distance, mileage, fuel price, and a reserv
 4. Choose the minimum-cost feasible vehicle.
 5. Flowchart
 
-
 Flowchart represented as a linear decision/process diagram for clear rendering in Word.
+Start → Enter the journey distance → Enter the number of vehicles → Enter each vehicle's mileage and fuel tank capacity → Enter the fuel price → Enter the required fuel reserve → Calculate the fuel required for each vehicle → Check whether each vehicle can complete the journey with the required reserve → If not feasible, exclude that vehicle → If feasible, calculate the total fuel cost → Compare the costs of all feasible vehicles → Identify the lowest-cost feasible vehicle → Display the vehicle details and estimated journey cost → Stop.
+
 6. Pseudo code
 FOR each vehicle (name, mileage):\n fuel = distance/mileage * (1+reserve/100)\n cost = fuel*price\n store result\nchoose minimum cost among feasible vehicles
 7. Python source code
@@ -453,8 +460,9 @@ Compare student answer strings with an answer key, count correct, incorrect, and
 4. Update category counts and score; print the result.
 5. Flowchart
 
-
 Flowchart represented as a linear decision/process diagram for clear rendering in Word.
+Start → Enter the student's answer string → Enter the answer key → Compare each student's answer with the corresponding answer key item → Count the correct answers → Count the incorrect answers → Count the unanswered items → Enter marks for each correct answer → Enter negative marks for each incorrect answer → Calculate the final score → Display the number of correct, incorrect, and unanswered items along with the final score → Stop.
+
 6. Pseudo code
 FOR each paired key and answer:\n IF answer blank: unanswered++\n ELSE IF normalized answer equals key: correct++, score+=2\n ELSE: incorrect++, score-=0.5\nPRINT counts and score
 7. Python source code
@@ -507,8 +515,9 @@ Determine how many buses are needed for each route based on passenger demand and
 4. Find unserved demand and print route summary.
 5. Flowchart
 
-
 Flowchart represented as a linear decision/process diagram for clear rendering in Word.
+Start → Enter the number of routes → Enter passenger demand for each route → Enter the seating capacity of each bus → Validate the input values → If invalid, display an error message and re-enter the values → If valid, calculate the number of buses required for each route → Compare total bus capacity with passenger demand → Check whether capacity is sufficient → If sufficient, assign the required buses → If insufficient, calculate the number of unserved passengers → Display the buses required for each route and unserved passenger details → Stop.
+
 6. Pseudo code
 FOR each route:\n needed = (demand + capacity - 1) // capacity\n available_capacity = available_buses * capacity\n unserved = max(0, demand - available_capacity)\n PRINT needed and unserved
 7. Python source code
@@ -556,8 +565,9 @@ Calculate an electricity bill using progressive consumption slabs, a fixed charg
 4. Apply the rebate if eligible and display bill.
 5. Flowchart
 
-
 Flowchart represented as a linear decision/process diagram for clear rendering in Word.
+Start → Enter the electricity units consumed → Enter the fixed charge → Enter the progressive slab rates → Enter the rebate percentage or amount → Validate the input values → If invalid, display an error message and re-enter the values → If valid, calculate the charges for each consumption slab → Add the fixed charge → Calculate the total bill amount → Apply the rebate → Calculate the final payable amount → Display the electricity bill details and final amount → Stop.
+
 6. Pseudo code
 energy = 0\ncharge first min(units,100) at 1.5\ncharge next min(max(units-100,0),100) at 2.5\ncharge remaining at 4.0\ntotal = energy + fixed\nIF energy < 200: total = total * 0.95\nPRINT total
 7. Python source code
